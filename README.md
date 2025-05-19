@@ -1,12 +1,15 @@
 # 📰 Daily Article
 > The Guardian API를 사용하여 영어 신문을 제공하는 심플한 데스크톱 어플리케이션입니다.
 
-![첫화면](./img/image.png)
+![첫화면](./img/home.jpg) | ![리스트 화면](./img/list.jpg)
+--|--|
 
 <br>
 
-**[⬇ 실행 파일 다운로드](https://github.com/tony96kimsh/DailyArticle/releases/download/1.0.0/Release.zip)**  
+- **[⬇ 실행 파일 다운로드](https://github.com/tony96kimsh/DailyArticle/releases/download/1.0.0/Release.zip)**  
 (압축 해제 후 `.exe` 파일을 실행해주세요)
+
+- [✍️ 노션 개발 일지 링크](https://stump-smartphone-024.notion.site/Daily-Article-1e6f398452c380289406f706b6038731?pvs=4)
 
 ---
 
@@ -34,6 +37,11 @@ WinForms를 활용한 데스크톱 앱 형태로 영어 뉴스 리더를 개발�
 - 기사 원문 링크 열기
 - 로딩 중 딤 처리 및 "Loading..." 표시
 - API 키 외부 파일에서 설정 (App.config)
+- **JSON 파일을 이용한 기사 저장**
+  - 최근 읽은 기사 목록 저장 (`readArticle.json`)
+  - 즐겨찾기 목록 저장 (`favoriteList.json`)
+- 읽은 기사와 즐겨찾기 리스트 열람 및 삭제 가능
+- 기사 클릭 시 다시 본문으로 돌아가 보기 기능 지원
 
 ---
 
@@ -47,16 +55,21 @@ WinForms를 활용한 데스크톱 앱 형태로 영어 뉴스 리더를 개발�
 - `linkLabel1`: Guardian 기사 원문 열기
 - `llbDev`: GitHub 프로젝트 열기
 - `btnChange`: 기사 갱신 버튼
+- `btnFavorite`: 즐겨찾기 추가/제외 버튼
+- `btnHistory`: 최근 기록 페이지 열기 버튼
+- `btnFavoriteList`: 즐겨찾기 페이지 열기 버튼
 - `overlay(Form)`: "Loading..." 표시용 반투명 폼 (TopMost)
 
 ### 폴더 구조
 
 ```
 DailyArticle/
-├── img/                  # 스크린샷 이미지 폴더
-├── bin/                  # 빌드 실행 파일 위치
+├── img/                  
+├── bin/                  
 ├── App.config            # API 키 설정
 ├── Form1.cs              # 메인 폼 로직
+├── FromReadList.cs       # 최근 기록 및 즐겨찾기 리스트 폼
+├── Article.cs            # 기사 클래스
 ├── Program.cs            # 진입점
 └── README.md             # 리드미 파일
 ```
@@ -67,23 +80,12 @@ DailyArticle/
   - `InitOverlay()`: 오버레이 폼 초기화
   - `showArticle()`: Guardian API 요청 및 기사 표시
   - `ParseHTML()`: HTML 제거 후 본문 정리
-  - `showLoading()`: 오버레이 토글 제어
-- `App.config`: API 키를 외부에서 분리하여 관리
-
----
-
-## 추후 작업 및 이슈
-
-### TODO
-
-- 날짜 선택 캘린더 기능 추가
-- 기사 즐겨찾기 기능 구현
-- 기사 히스토리 열람 기능
-
-### Issues
-
-- Merriweather 폰트 미설치 시 폰트 대체 문제
-- 다중 모니터 환경에서 오버레이 위치 이슈 발생 가능성
+  - `SaveArticle()`: JSON 파일로 기사 저장
+  - `ShowArticle(Article)`: 전달받은 기사 표시
+- `FromReadList.cs`
+  - `showList()`: JSON 파일에서 리스트 읽어오기
+  - `btnDelete_Click()`: 기사 삭제
+  - `btnViewArticle_Click()`: 기사 본문 다시 보기
 
 ---
 
@@ -91,4 +93,4 @@ DailyArticle/
 
 - Merriweather 폰트  
 - The Guardian Open API  
-- [Microsoft Docs - WinForms](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/)  
+- [Microsoft Docs - WinForms](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/)

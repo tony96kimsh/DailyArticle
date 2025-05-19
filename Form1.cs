@@ -11,6 +11,9 @@ using System.Security.Cryptography.X509Certificates;
 //폰트
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
+// JSON file
+using System.IO;
+using Newtonsoft.Json;
 
 
 namespace DailyArticle
@@ -26,6 +29,8 @@ namespace DailyArticle
         static extern bool HideCaret(IntPtr hWnd);
         private Form overlay;
         private bool isLoading = false;
+        private bool isFavorite = false;
+        private Article currentArticle;
 
 
         //폰트적용
@@ -57,9 +62,6 @@ namespace DailyArticle
                 bodyFont = new Font("맑은 고딕", 14f, FontStyle.Regular);
             }
         }
-
-
-
         public string ParseHTML(string resBody)
         {
             string articleBody = resBody;
@@ -134,10 +136,54 @@ namespace DailyArticle
                 overlay.Show();
             }
         }
+        public void SaveArticle(string resId, string webtitle, string webUrl, string webDate, string articleBody)
+        {
+            string path = Path.Combine(Application.StartupPath, "readArticle.json");
+
+            List<Article> articleList = new List<Article>();
+
+            // 기존 파일이 있다면 불러오기
+            if (File.Exists(path))
+            {
+                string existingJson = File.ReadAllText(path);
+                articleList = JsonConvert.DeserializeObject<List<Article>>(existingJson) ?? new List<Article>();
+            }
+
+            // 새 기사 객체 생성
+            Article article = new Article
+            {
+                id = resId,
+                title = webtitle,
+                webUrl = webUrl,
+                webDate = webDate,
+                articleBody = articleBody,
+                requestedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            };
+            currentArticle = new Article
+            {
+                id = resId,
+                title = webtitle,
+                webUrl = webUrl,
+                webDate = webDate,
+                articleBody = articleBody,
+                requestedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            };
+
+            // 리스트에 추가
+            articleList.Add(article);
+
+            // 전체를 다시 JSON으로 직렬화
+            string newJson = JsonConvert.SerializeObject(articleList, Formatting.Indented);
+            File.WriteAllText(path, newJson);
+        }
+
+
+
         public void showArticle()
         {
-            showLoading();
-            // Guardian Open API 요청 URL 구성
+            showLoading(); // ON
+
+            // GetArticle
             string today = DateTime.Now.ToString("yyyy-MM-dd"); // 오늘 날짜: 2025-05-17 같은 형식
 
             string url = $"https://content.guardianapis.com/search" +     // Guardian 검색 엔드포인트
@@ -155,6 +201,7 @@ namespace DailyArticle
             // JSON Parse
             JObject json = JObject.Parse(result);
             // 뉴턴소프트 제이슨 문법 : json은 [키값], 배열의 경우 [인덱스]로 진입
+            string resId = json["response"]?["results"]?[0]?["id"]?.ToString();
             string resWebTitle = json["response"]?["results"]?[0]?["webTitle"]?.ToString();
             string resWebPublicationDate = json["response"]?["results"]?[0]?["webPublicationDate"]?.ToString();
             string resWebUrl = json["response"]?["results"]?[0]?["webUrl"]?.ToString();
@@ -168,12 +215,28 @@ namespace DailyArticle
             txtTitle.Text = resWebTitle;
             lblDate.Text = "Publication date: " + resWebPublicationDate;
             txtAriticle.Text = articleBody;
+            SaveArticle(resId, resWebTitle, resWebUrl, resWebPublicationDate, articleBody);
 
-            showLoading();
+
+            showLoading(); // OFF           
         }
+        public void ShowArticle(Article article)
+        {
+            txtTitle.Text = article.title;
+            lblDate.Text = "Publication date: " + article.webDate;
+            txtAriticle.Text = article.articleBody;
+            linkUrl = article.webUrl;
+        }
+
+
         public Form1()
         {
             InitializeComponent();
+            tip.SetToolTip(btnChange, "새로운 기사 요청");
+            tip.SetToolTip(btnFavorite, "즐겨찾기 추가/제거");
+            tip.SetToolTip(btnHistory, "최근 본 기사 목록 보기");
+            tip.SetToolTip(btnFavoriteList, "즐겨찾기 기사 목록 보기");
+
         }
 
 
@@ -245,12 +308,16 @@ namespace DailyArticle
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
-
+            FromReadList form2 = new FromReadList(this, true);
+            form2.Show();
+            this.Hide();
         }
 
         private void btnFavoriteList_Click(object sender, EventArgs e)
         {
-
+            FromReadList form2 = new FromReadList(this, false);
+            form2.Show();
+            this.Hide();
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -267,6 +334,54 @@ namespace DailyArticle
             {
                 MessageBox.Show("링크를 열 수 없습니다: " + ex.Message);
             }
+        }
+
+        private void btnFavorite_Click(object sender, EventArgs e)
+        {
+            isFavorite = !isFavorite;
+            string path = Path.Combine(Application.StartupPath, "favoriteList.json");
+            if (isFavorite)
+            {                
+                List<Article> favList = new List<Article>();
+
+                if (File.Exists(path))
+                {
+                    string json = File.ReadAllText(path);
+                    // 직렬화
+                    favList = JsonConvert.DeserializeObject<List<Article>>(json) ?? new List<Article>();
+                }
+
+                if (!favList.Any(a => a.id == currentArticle.id))
+                {
+                    favList.Add(currentArticle);
+
+                    string newJson = JsonConvert.SerializeObject(favList, Formatting.Indented);
+                    File.WriteAllText(path, newJson);
+                }
+
+                btnFavorite.ForeColor = Color.Gold;                
+                MessageBox.Show("즐겨찾기에 추가되었습니다!");
+            }
+            else
+            {
+                // 즐겨찾기에서 제거
+                if (File.Exists(path))
+                {
+                    string json = File.ReadAllText(path);
+                    List<Article> favList = JsonConvert.DeserializeObject<List<Article>>(json) ?? new List<Article>();
+
+                    // 현재 기사 ID를 제외한 새 리스트 생성
+                    favList = favList.Where(a => a.id != currentArticle.id).ToList();
+
+                    string newJson = JsonConvert.SerializeObject(favList, Formatting.Indented);
+                    File.WriteAllText(path, newJson);
+                }
+
+                btnFavorite.ForeColor = SystemColors.ControlLight;
+                MessageBox.Show("즐겨찾기에서 제외되었습니다.");
+            }
+
+
         }
     }
 }

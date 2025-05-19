@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             txtAriticle = new RichTextBox();
             lblDate = new Label();
@@ -36,11 +37,10 @@
             txtTitle = new RichTextBox();
             label1 = new Label();
             btnFavoriteList = new Button();
-            btnCalendar = new Button();
             btnHistory = new Button();
             btnFavorite = new Button();
-            button1 = new Button();
             linkLabel2 = new LinkLabel();
+            tip = new ToolTip(components);
             SuspendLayout();
             // 
             // txtAriticle
@@ -67,7 +67,7 @@
             lblDate.ForeColor = SystemColors.AppWorkspace;
             lblDate.Location = new Point(21, 168);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(137, 29);
+            lblDate.Size = new Size(110, 24);
             lblDate.TabIndex = 4;
             lblDate.Text = "Publication date: ";
             // 
@@ -90,9 +90,9 @@
             linkLabel1.Font = new Font("Merriweather 24pt SemiCondensed", 11F);
             linkLabel1.ForeColor = Color.Black;
             linkLabel1.LinkColor = Color.Gray;
-            linkLabel1.Location = new Point(1286, 164);
+            linkLabel1.Location = new Point(1313, 164);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(135, 33);
+            linkLabel1.Size = new Size(108, 26);
             linkLabel1.TabIndex = 6;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "visit article link";
@@ -119,7 +119,7 @@
             label1.ForeColor = SystemColors.GrayText;
             label1.Location = new Point(21, 876);
             label1.Name = "label1";
-            label1.Size = new Size(570, 25);
+            label1.Size = new Size(461, 20);
             label1.TabIndex = 8;
             label1.Text = "본문에 커서를 올린 채로 Ctrl + 마우스 휠 사용 시, 글자 크기 조절 가능합니다.";
             // 
@@ -127,7 +127,7 @@
             // 
             btnFavoriteList.Font = new Font("Noto Sans KR", 18F);
             btnFavoriteList.ForeColor = Color.Gold;
-            btnFavoriteList.Location = new Point(137, 11);
+            btnFavoriteList.Location = new Point(79, 12);
             btnFavoriteList.Margin = new Padding(3, 4, 3, 4);
             btnFavoriteList.Name = "btnFavoriteList";
             btnFavoriteList.Size = new Size(52, 54);
@@ -136,24 +136,11 @@
             btnFavoriteList.UseVisualStyleBackColor = true;
             btnFavoriteList.Click += btnFavoriteList_Click;
             // 
-            // btnCalendar
-            // 
-            btnCalendar.Font = new Font("Noto Sans KR", 18F);
-            btnCalendar.ForeColor = Color.Crimson;
-            btnCalendar.Location = new Point(21, 13);
-            btnCalendar.Margin = new Padding(3, 4, 3, 4);
-            btnCalendar.Name = "btnCalendar";
-            btnCalendar.Size = new Size(52, 54);
-            btnCalendar.TabIndex = 11;
-            btnCalendar.Text = "📅";
-            btnCalendar.UseVisualStyleBackColor = true;
-            btnCalendar.Click += btnCalendar_Click;
-            // 
             // btnHistory
             // 
             btnHistory.Font = new Font("Noto Sans KR", 18F);
             btnHistory.ForeColor = SystemColors.ActiveCaption;
-            btnHistory.Location = new Point(79, 12);
+            btnHistory.Location = new Point(21, 12);
             btnHistory.Margin = new Padding(3, 4, 3, 4);
             btnHistory.Name = "btnHistory";
             btnHistory.Size = new Size(52, 54);
@@ -173,17 +160,7 @@
             btnFavorite.TabIndex = 13;
             btnFavorite.Text = "🌟";
             btnFavorite.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Font = new Font("Merriweather 24pt SemiCondensed", 12F);
-            button1.ForeColor = SystemColors.Control;
-            button1.Location = new Point(1267, 876);
-            button1.Name = "button1";
-            button1.Size = new Size(154, 41);
-            button1.TabIndex = 14;
-            button1.Text = "Read complete";
-            button1.UseVisualStyleBackColor = true;
+            btnFavorite.Click += btnFavorite_Click;
             // 
             // linkLabel2
             // 
@@ -191,9 +168,9 @@
             linkLabel2.Font = new Font("Merriweather 24pt SemiCondensed", 8F);
             linkLabel2.ForeColor = Color.Black;
             linkLabel2.LinkColor = SystemColors.ControlDark;
-            linkLabel2.Location = new Point(21, 954);
+            linkLabel2.Location = new Point(1279, 880);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(142, 24);
+            linkLabel2.Size = new Size(112, 19);
             linkLabel2.TabIndex = 16;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "\U0001f9d1‍💻 Development Info";
@@ -202,15 +179,13 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(13F, 39F);
+            AutoScaleDimensions = new SizeF(10F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1442, 996);
+            ClientSize = new Size(1442, 933);
             Controls.Add(linkLabel2);
-            Controls.Add(button1);
             Controls.Add(btnFavorite);
             Controls.Add(btnHistory);
-            Controls.Add(btnCalendar);
             Controls.Add(btnFavoriteList);
             Controls.Add(label1);
             Controls.Add(txtTitle);
@@ -236,10 +211,9 @@
         private RichTextBox txtTitle;
         private Label label1;
         private Button btnFavoriteList;
-        private Button btnCalendar;
         private Button btnHistory;
         private Button btnFavorite;
-        private Button button1;
         private LinkLabel linkLabel2;
+        private ToolTip tip;
     }
 }
