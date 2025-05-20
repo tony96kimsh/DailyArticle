@@ -1,4 +1,4 @@
-# 📰 Daily Article
+# 📰 Daily Article (영어 신문 리더 앱)
 > The Guardian API를 사용하여 영어 신문을 제공하는 심플한 데스크톱 어플리케이션입니다.
 
 ![첫화면](./img/home.jpg) | ![리스트 화면](./img/list.jpg)

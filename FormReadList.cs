@@ -15,19 +15,19 @@ using System.Linq.Expressions;
 
 namespace DailyArticle
 {
-    public partial class FromReadList : Form
+    public partial class FormReadList : Form
     {
         private static bool isHistory = true; // default 
         private static bool isBackButtonClicked = false;
-        Form1 form1;
-        public FromReadList()
+        FormArticleView form1;
+        public FormReadList()
         {
             InitializeComponent();
             isHistory = true;
             isBackButtonClicked = false;
         }
 
-        public FromReadList(Form1 form, bool selectedMenu)
+        public FormReadList(FormArticleView form, bool selectedMenu)
         {
             InitializeComponent();
             this.form1 = form;

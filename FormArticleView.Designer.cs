@@ -1,6 +1,6 @@
 ﻿namespace DailyArticle
 {
-    partial class Form1
+    partial class FormArticleView
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            txtAriticle = new RichTextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormArticleView));
+            txtArticle = new RichTextBox();
             lblDate = new Label();
             btnChange = new Button();
             linkLabel1 = new LinkLabel();
@@ -43,22 +43,22 @@
             tip = new ToolTip(components);
             SuspendLayout();
             // 
-            // txtAriticle
+            // txtArticle
             // 
-            txtAriticle.BackColor = Color.White;
-            txtAriticle.BorderStyle = BorderStyle.FixedSingle;
-            txtAriticle.Font = new Font("Merriweather 24pt SemiCondensed", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtAriticle.ForeColor = SystemColors.InfoText;
-            txtAriticle.Location = new Point(21, 201);
-            txtAriticle.Margin = new Padding(3, 4, 3, 4);
-            txtAriticle.Name = "txtAriticle";
-            txtAriticle.ReadOnly = true;
-            txtAriticle.ScrollBars = RichTextBoxScrollBars.Vertical;
-            txtAriticle.Size = new Size(1400, 667);
-            txtAriticle.TabIndex = 2;
-            txtAriticle.Text = "Article context loading...";
-            txtAriticle.Enter += txtAriticle_Enter;
-            txtAriticle.MouseDown += txtAriticle_MouseDown;
+            txtArticle.BackColor = Color.White;
+            txtArticle.BorderStyle = BorderStyle.FixedSingle;
+            txtArticle.Font = new Font("Merriweather 24pt SemiCondensed", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtArticle.ForeColor = SystemColors.InfoText;
+            txtArticle.Location = new Point(21, 201);
+            txtArticle.Margin = new Padding(3, 4, 3, 4);
+            txtArticle.Name = "txtArticle";
+            txtArticle.ReadOnly = true;
+            txtArticle.ScrollBars = RichTextBoxScrollBars.Vertical;
+            txtArticle.Size = new Size(1400, 667);
+            txtArticle.TabIndex = 2;
+            txtArticle.Text = "Article context loading...";
+            txtArticle.Enter += txtArticle_Enter;
+            txtArticle.MouseDown += txtArticle_MouseDown;
             // 
             // lblDate
             // 
@@ -192,7 +192,7 @@
             Controls.Add(linkLabel1);
             Controls.Add(btnChange);
             Controls.Add(lblDate);
-            Controls.Add(txtAriticle);
+            Controls.Add(txtArticle);
             Font = new Font("Merriweather 24pt SemiCondensed", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(5);
@@ -204,7 +204,7 @@
         }
 
         #endregion
-        private RichTextBox txtAriticle;
+        private RichTextBox txtArticle;
         private Label lblDate;
         private Button btnChange;
         private LinkLabel linkLabel1;

@@ -1,6 +1,6 @@
 ﻿namespace DailyArticle
 {
-    partial class FromReadList
+    partial class FormReadList
     {
         /// <summary>
         /// Required designer variable.
