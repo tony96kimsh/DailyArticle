@@ -1,13 +1,9 @@
 using System;
-using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Newtonsoft.Json.Linq; // json parsing ref
 using System.Text.RegularExpressions; // html 요소 제거용
 using System.Diagnostics; // link 선택 시 브라우저 동작용
 using System.Runtime.InteropServices; // 캐럿 제어
 using System.Configuration;
-using System.Security.Cryptography.X509Certificates;
 //폰트
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
@@ -67,13 +63,6 @@ namespace DailyArticle
                 bodyFont = new Font("맑은 고딕", 14f, FontStyle.Regular);
             }
         }
-        public void ShowArticle(Article article)
-        {
-            txtTitle.Text = article.title;
-            lblDate.Text = "Publication date: " + article.webDate;
-            txtArticle.Text = article.articleBody;
-            linkUrl = article.webUrl;
-        }
         public void setArticle (Article article)
         {
             // 폼 컨트롤
@@ -81,13 +70,25 @@ namespace DailyArticle
             lblDate.Text = "Publication date: " + article.webDate;
             txtArticle.Text = article.articleBody;            
         }
+        public void ShowArticle(Article article)
+        {
+            txtTitle.Text = article.title;
+            lblDate.Text = "Publication date: " + article.webDate;
+            txtArticle.Text = article.articleBody;
+            linkUrl = article.webUrl;
+            
+        }
 
         public void ShowArticle ()
         {
             // API 응답 기사
             loading.showLoading();
+            // 기사 API 요청
             currentArticle = makeArticle.GetArticle();
+                       
             setArticle(currentArticle);
+
+
             makeJson.SaveArticle(currentArticle);
             loading.showLoading();
         }
@@ -146,11 +147,6 @@ namespace DailyArticle
         private void txtArticle_Enter(object sender, EventArgs e)
         {
             HideCaret(txtArticle.Handle);
-        }
-
-        private void btnCalendar_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnHistory_Click(object sender, EventArgs e)

@@ -27,6 +27,7 @@
             ListViewItem listViewItem1 = new ListViewItem(new string[] { "test", "yy-mn-dd" }, -1);
             ListViewItem listViewItem2 = new ListViewItem("test");
             ListViewItem listViewItem3 = new ListViewItem("test");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReadList));
             listView1 = new ListView();
             colTitle = new ColumnHeader();
             colDate = new ColumnHeader();
@@ -131,7 +132,7 @@
             btnViewArticle.UseVisualStyleBackColor = true;
             btnViewArticle.Click += btnViewArticle_Click;
             // 
-            // FromReadList
+            // FormReadList
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -145,7 +146,8 @@
             Controls.Add(label1);
             Controls.Add(listView1);
             Font = new Font("Noto Sans KR", 9F);
-            Name = "FromReadList";
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "FormReadList";
             Text = "Daily Article by The Guardian";
             FormClosing += FromReadList_FormClosing;
             Load += FromReadList_Load;

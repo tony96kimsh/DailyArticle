@@ -7,7 +7,7 @@
 <br>
 
 - **[⬇ 실행 파일 다운로드](https://github.com/tony96kimsh/DailyArticle/releases/download/1.0.0/Release.zip)**  
-(압축 해제 후 `.exe` 파일을 실행해주세요)
+(압축 해제 후 `DailyArticle.exe` 파일을 실행해주세요)
 
 - [✍️ 노션 개발 일지 링크](https://stump-smartphone-024.notion.site/Daily-Article-1e6f398452c380289406f706b6038731?pvs=4)
 

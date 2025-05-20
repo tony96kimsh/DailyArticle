@@ -60,10 +60,12 @@
             if (overlay.Visible)
             {
                 overlay.Hide();
+                Cursor.Current = Cursors.Default;
             }
             else
             {
                 overlay.Show();
+                Cursor.Current = Cursors.WaitCursor;
             }
         }
     }
