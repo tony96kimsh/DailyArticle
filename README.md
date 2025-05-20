@@ -64,14 +64,26 @@ WinForms를 활용한 데스크톱 앱 형태로 영어 뉴스 리더를 개발�
 
 ```
 DailyArticle/
-├── img/                  
-├── bin/                  
-├── App.config            # API 키 설정
-├── Form1.cs              # 메인 폼 로직
-├── FromReadList.cs       # 최근 기록 및 즐겨찾기 리스트 폼
-├── Article.cs            # 기사 클래스
-├── Program.cs            # 진입점
-└── README.md             # 리드미 파일
+│
+├── FormArticleView.cs               # WinForm: 기사 상세 보기 UI
+├── FormArticleView.Designer.cs
+├── FormArticleView.resx
+│
+├── FormReadList.cs                  # WinForm: 기사 목록 보기 UI
+├── FormReadList.Designer.cs
+├── FormReadList.resx
+│
+├── Article.cs                        # 기사 데이터 모델 클래스
+├── MakeArticle.cs                   # 기사 요청 및 Article 객체 생성
+├── MakeJson.cs                      # HTML 파싱, JSON 저장 기능
+├── Loading.cs                       # 로딩 오버레이 구현
+│
+├── fonts/                            # UI 폰트
+│   ├── Merriweather_24pt_SemiCondensed-Bold.ttf
+│   └── Merriweather_24pt_SemiCondensed-Regular.ttf
+│
+└── img/                              # README용 이미지
+
 ```
 
 ### 코드 구조 요약
