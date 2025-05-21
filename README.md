@@ -9,7 +9,7 @@
 - **[⬇ 실행 파일 다운로드](https://github.com/tony96kimsh/DailyArticle/releases/download/1.2.0/DailyArticle.exe)**  
 
 
-- [✍️ 노션 개발 일지 링크](https://stump-smartphone-024.notion.site/Daily-Article-1e6f398452c380289406f706b6038731?pvs=4)
+- [✍️ 노션 개발 일지 링크](https://github.com/tony96kimsh/DailyArticle/releases/download/1.1.0/DailyArticle.exe)
 
 ---
 
