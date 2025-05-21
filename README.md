@@ -6,7 +6,7 @@
 
 <br>
 
-- **[⬇ 실행 파일 다운로드](https://github.com/tony96kimsh/DailyArticle/releases/download/1.2.0/DailyArticle.exe)**  
+- **[⬇ 실행 파일 다운로드](https://github.com/tony96kimsh/DailyArticle/releases/download/1.1.0/DailyArticle.exe)**  
 
 
 - [✍️ 노션 개발 일지 링크](https://github.com/tony96kimsh/DailyArticle/releases/download/1.1.0/DailyArticle.exe)
