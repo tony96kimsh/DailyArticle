@@ -223,8 +223,6 @@ namespace DailyArticle
                 btnFavorite.ForeColor = SystemColors.ControlLight;
                 MessageBox.Show("즐겨찾기에서 제외되었습니다.");
             }
-
-
         }
     }
 }

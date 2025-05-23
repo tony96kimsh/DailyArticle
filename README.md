@@ -30,6 +30,7 @@ WinForms를 활용한 데스크톱 앱 형태로 영어 뉴스 리더를 개발�
 - API: [The Guardian Open API](https://open-platform.theguardian.com/)
 
 ### 주요 기능
+![](./img/running.gif)
 
 - 매일 가장 중요한 영어 뉴스를 자동으로 제공
 - 기사 제목, 본문, 발행일 표시
